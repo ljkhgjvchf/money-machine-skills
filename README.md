@@ -25,6 +25,15 @@ Video walkthrough: *[link added when published]*
 `audit-seo` goes deeper (Lighthouse, keyword rankings, competitor overlap) and needs DataForSEO
 because that data genuinely isn't available from a page fetch alone.
 
+**`audit-cro` is a fork, not built from scratch.** Its advisory framework (value prop, headline,
+CTA hierarchy, page-specific playbooks, 670 lines of experiment ideas and form-optimization
+reference) is forked from [coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills)
+(42.9K★, MIT licensed, © Corey Haines) — checked directly before forking, not taken on faith,
+because it's more mature than anything buildable in a day. The structural audit checklist (5
+scored pass/fail checks) bolted on top is original to this bundle, so `audit-cro` outputs both
+an advisory read and a scored audit, matching the other two skills' format. Full attribution in
+the skill file itself and in [`LICENSE`](LICENSE).
+
 **Not included here on purpose:** what happens *after* someone converts — lead routing,
 scoring, automated follow-up. That's a real, separate topic (n8n + a CRM, not a Claude skill),
 and cramming it in here would make all three of these shallower. Worth its own build.

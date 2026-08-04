@@ -1,60 +1,201 @@
 ---
 name: audit-cro
-description: Conversion Rate Optimization Audit — audits a live page for the specific structural things that make visitors not convert, beyond generic "add testimonials" advice. Use when the user says "audit my conversion rate", "why isn't my page converting", "CRO audit", or provides a URL and asks why visitors aren't converting.
+description: "When the user wants to optimize, improve, or increase conversions on any marketing page or form — including homepage, landing pages, pricing pages, feature pages, lead capture forms, or contact forms. Also use when the user says 'CRO,' 'conversion rate optimization,' 'this page isn't converting,' 'improve conversions,' 'why isn't this page working,' 'my landing page sucks,' 'form abandonment,' 'nobody's converting,' 'low conversion rate,' or 'this page needs work.' Use this even if the user just shares a URL and asks for feedback."
+metadata:
+  version: 2.0.0
 ---
 
-# Conversion Rate Optimization Audit
+# Conversion Rate Optimization (CRO)
 
-*"Why aren't visitors converting?"*
+**Source:** the advisory framework below (through "Form Optimization") is forked from
+[coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills)
+(`skills/cro`), MIT licensed, © Corey Haines. Used as-is because it's more mature than
+anything built from scratch would be in a day — versioned, evaluated, and covers page-type
+nuance this repo's other two skills don't need to. The **Structural Audit Checklist** section
+at the end is original to this bundle — the 4 mechanical checks that turn this from advisory
+feedback into a scored audit with a pass/fail per check, matching the format of this bundle's
+other two skills.
 
-Most CRO advice stops at "add trust signals." This skill checks the four things that actually
-separate a converting page from a beautiful one: CTA collisions, message match, trust-signal
-placement (not just presence), and objection-handling order. A $10k-looking page with a buried
-CTA converts worse than a plain page with one clear ask — this skill finds out which one you
-have.
+You are a conversion rate optimization expert. Your goal is to analyze marketing pages and provide actionable recommendations to improve conversion rates.
 
-## Trigger
+## Initial Assessment
 
-User invokes `/audit-cro <url>`
+**Check for product marketing context first:**
+If `.agents/product-marketing.md` exists (or `.claude/product-marketing.md`, or the legacy `product-marketing-context.md` filename, in older setups), read it before asking questions. Use that context and only ask for information not already covered or specific to this task.
 
-**Requires:** nothing beyond what Claude Code already has — this works with a plain page fetch.
-No paid API needed.
+Before providing recommendations, identify:
+
+1. **Page Type**: Homepage, landing page, pricing, feature, blog, about, other
+2. **Primary Conversion Goal**: Sign up, request demo, purchase, subscribe, download, contact sales
+3. **Traffic Context**: Where are visitors coming from? (organic, paid, email, social)
 
 ---
 
-## Protocol
+## CRO Analysis Framework
 
-### Step 0 — Parse inputs
+Analyze the page across these dimensions, in order of impact:
 
-- `TARGET_URL` — full URL including https://
-- `AUDIT_DATE` — today's date, YYYY-MM-DD
+### 1. Value Proposition Clarity (Highest Impact)
 
-### Step 1 — Fetch the page
+**Check for:**
+- Can a visitor understand what this is and why they should care within 5 seconds?
+- Is the primary benefit clear, specific, and differentiated?
+- Is it written in the customer's language (not company jargon)?
 
-Use whatever URL-fetch tool is available (WebFetch, Firecrawl scrape, or a direct curl if
-neither is connected — curl won't render JS-heavy sites fully, note this as a limitation if it
-applies). Get the full rendered markdown/HTML: headings, buttons/links styled as CTAs, forms,
-testimonial/trust-badge content, and any FAQ or objection-handling copy.
+**Common issues:**
+- Feature-focused instead of benefit-focused
+- Too vague or too clever (sacrificing clarity)
+- Trying to say everything instead of the most important thing
 
-### Step 2 — Score the 5 checks
+### 2. Headline Effectiveness
+
+**Evaluate:**
+- Does it communicate the core value proposition?
+- Is it specific enough to be meaningful?
+- Does it match the traffic source's messaging?
+
+**Strong headline patterns:**
+- Outcome-focused: "Get [desired outcome] without [pain point]"
+- Specificity: Include numbers, timeframes, or concrete details
+- Social proof: "Join 10,000+ teams who..."
+
+### 3. CTA Placement, Copy, and Hierarchy
+
+**Primary CTA assessment:**
+- Is there one clear primary action?
+- Is it visible without scrolling?
+- Does the button copy communicate value, not just action?
+  - Weak: "Submit," "Sign Up," "Learn More"
+  - Strong: "Start Free Trial," "Get My Report," "See Pricing"
+
+**CTA hierarchy:**
+- Is there a logical primary vs. secondary CTA structure?
+- Are CTAs repeated at key decision points?
+
+### 4. Visual Hierarchy and Scannability
+
+**Check:**
+- Can someone scanning get the main message?
+- Are the most important elements visually prominent?
+- Is there enough white space?
+- Do images support or distract from the message?
+
+### 5. Trust Signals and Social Proof
+
+**Types to look for:**
+- Customer logos (especially recognizable ones)
+- Testimonials (specific, attributed, with photos)
+- Case study snippets with real numbers
+- Review scores and counts
+- Security badges (where relevant)
+
+**Placement:** Near CTAs and after benefit claims
+
+### 6. Objection Handling
+
+**Common objections to address:**
+- Price/value concerns
+- "Will this work for my situation?"
+- Implementation difficulty
+- "What if it doesn't work?"
+
+**Address through:** FAQ sections, guarantees, comparison content, process transparency
+
+### 7. Friction Points
+
+**Look for:**
+- Too many form fields
+- Unclear next steps
+- Confusing navigation
+- Required information that shouldn't be required
+- Mobile experience issues
+- Long load times
+
+---
+
+## Output Format
+
+Structure your recommendations as:
+
+### Quick Wins (Implement Now)
+Easy changes with likely immediate impact.
+
+### High-Impact Changes (Prioritize)
+Bigger changes that require more effort but will significantly improve conversions.
+
+### Test Ideas
+Hypotheses worth A/B testing rather than assuming.
+
+### Copy Alternatives
+For key elements (headlines, CTAs), provide 2-3 alternatives with rationale.
+
+---
+
+## Page-Specific Frameworks
+
+### Homepage CRO
+- Clear positioning for cold visitors
+- Quick path to most common conversion
+- Handle both "ready to buy" and "still researching"
+
+### Landing Page CRO
+- Message match with traffic source
+- Single CTA (remove navigation if possible)
+- Complete argument on one page
+
+### Pricing Page CRO
+- Clear plan comparison
+- Recommended plan indication
+- Address "which plan is right for me?" anxiety
+
+### Feature Page CRO
+- Connect feature to benefit
+- Use cases and examples
+- Clear path to try/buy
+
+### Blog Post CRO
+- Contextual CTAs matching content topic
+- Inline CTAs at natural stopping points
+
+---
+
+## Experiment Ideas
+
+When recommending experiments, consider tests for:
+- Hero section (headline, visual, CTA)
+- Trust signals and social proof placement
+- Pricing presentation
+- Form optimization
+- Navigation and UX
+
+**For comprehensive experiment ideas by page type**: See [references/experiments.md](references/experiments.md)
+
+---
+
+## Form Optimization
+
+For detailed form CRO guidance — including field optimization, multi-step forms, error handling, and form-specific experiments — see [references/form.md](references/form.md).
+
+---
+---
+
+## Structural Audit Checklist (original to this bundle)
+
+The framework above is advisory — it reads a page and gives recommendations. The 5 checks
+below turn it into a scored audit, matching the pass/fail format used by this bundle's other
+two skills (`audit-lead-architecture`, `audit-seo`). Run these in addition to the analysis
+above when the user wants an audit (not just feedback) — trigger words: "audit," "score," "how
+many issues."
 
 | # | Check | What to look for | Pass condition | Fail severity |
 |---|---|---|---|---|
-| C1 | CTA collision | Every distinct primary call-to-action on the page (buttons, prominent linked text — "Book a call," "Buy now," "Get started," "Download," etc.) | Exactly 1 primary CTA repeated consistently. 2 is a WARN, 3+ is a FAIL — competing asks split intent. | 🟠 if 2, 🔴 if 3+ |
-| C2 | Message match | Compare the H1/hero headline against what a visitor likely searched or clicked to arrive (infer from page context — service name, industry terms used elsewhere on the page) | H1 makes a specific, concrete promise tied to the page's actual topic — not a vague brand tagline | 🟠 if vague/generic, note the specific mismatch |
-| C3 | Trust signal placement | Where do trust signals (logos, testimonial quotes, review counts, security badges, case-study names) sit relative to the nearest CTA or form? | At least one trust signal within the same viewport/section as a primary CTA — not only in a separate, distant "testimonials" section | 🟠 if all trust signals are isolated from CTAs |
-| C4 | Objection-handling order | Locate any FAQ, "but what about," or objection-style copy on the page | At least one objection is answered *before* the final/primary CTA appears in reading order, not only after | 🟡 if objections only appear after the ask, or not at all |
-| C5 | Form friction | Count visible fields on the primary conversion form, if one exists on the page | ≤ 4 fields for a first-touch form. Note: this only sees what's in the fetched HTML — JS-injected forms may need manual verification, say so if the page appears to have a form you can't fully inspect | 🟡 if 5–7 fields, 🟠 if 8+, note "verify manually" if the form isn't fully visible in the fetch |
+| C1 | CTA collision | Every distinct primary call-to-action on the page (buttons, prominent linked text) | Exactly 1 primary CTA repeated consistently. 2 is a WARN, 3+ is a FAIL | 🟠 if 2, 🔴 if 3+ |
+| C2 | Message match | Compare the H1/hero headline against what a visitor likely searched or clicked to arrive | H1 makes a specific, concrete promise tied to the page's actual topic, not a vague brand tagline | 🟠 if vague/generic, note the specific mismatch |
+| C3 | Trust signal placement | Where do trust signals sit relative to the nearest CTA or form? | At least one trust signal within the same viewport/section as a primary CTA | 🟠 if all trust signals are isolated from CTAs |
+| C4 | Objection-handling order | Locate any FAQ or objection-style copy | At least one objection is answered *before* the final/primary CTA appears in reading order | 🟡 if objections only appear after the ask, or not at all |
+| C5 | Form friction | Count visible fields on the primary conversion form | ≤ 4 fields for a first-touch form | 🟡 if 5–7, 🟠 if 8+ |
 
-### Step 3 — Build findings list
-
-For each FAIL/WARN: **Issue**, **What was found** (quote the actual CTA text, headline, or field count — not a generic description), **What to fix** (specific, e.g. "Page has 3 competing CTAs: 'Book a Call', 'Download Guide', 'Start Free Trial'. Pick one as primary, demote the others to secondary/footer links."), **Effort** (Quick win < 1h / Half day / Full day).
-
-### Step 4 — Output
-
-Print a structured markdown report to terminal, and save it as `cro-audit-[domain]-[date].md`
-in the current directory. If Notion is connected and the user wants it there too, offer to
-create a page — don't require it.
+**Output for the audit mode:**
 
 ```
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -64,27 +205,16 @@ CRO AUDIT — [DOMAIN] — [AUDIT_DATE]
 Checks passed: [X]/5
 
 Findings:
-  [severity] [issue] — [one-line what-to-fix]
+  [severity] [issue] — [one-line what-to-fix, quoting real page content]
   ...
 
-Full report saved to: cro-audit-[domain]-[date].md
+Full advisory analysis (value prop, headline, hierarchy, etc.) follows above using the
+framework, applied to the same page.
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 
----
-
-## Error handling
-
-| Situation | Action |
-|---|---|
-| Page fetch fails | Stop and report the error. Don't guess at page content. |
-| No forms detected on the page | Mark C5 "N/A — no form found on this page," not a FAIL. |
-| Page is JS-heavy and the fetch tool couldn't render it | Say so explicitly in the report — "static fetch only, dynamic content may be missed" — rather than silently scoring incomplete data as if it were complete. |
-
-## Rules
-
-- **C2 (message match) is a judgment call, not a hard metric** — say so in the output. Label it
-  as Claude's reasoning, not a measured score, same as the other qualitative checks.
-- **Quote real page content in findings** — "your CTA says X" beats "improve your CTA."
-- **This skill does not touch analytics, ad accounts, or tracking pixels** — it only reads what's
-  on the page. Pairs with `audit-lead-architecture` for the funnel/tracking layer.
+**Rules for the checklist specifically:**
+- C2 is a judgment call, not a hard metric — say so in the output.
+- Quote real page content in findings ("your CTA says X"), not generic advice.
+- This checklist does not touch analytics, ad accounts, or tracking pixels — pairs with
+  `audit-lead-architecture` for the funnel/tracking layer.
