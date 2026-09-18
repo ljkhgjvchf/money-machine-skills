@@ -42,7 +42,7 @@ Fire all of these simultaneously. Do not wait for one before starting another.
 1d. mcp__dataforseo__dataforseo_labs_google_domain_rank_overview(target=DOMAIN)
 1e. mcp__dataforseo__dataforseo_labs_google_ranked_keywords(target=DOMAIN, limit=20, order_by=["keyword_data.keyword_info.search_volume,desc"])
 1f. mcp__dataforseo__dataforseo_labs_google_competitors_domain(target=DOMAIN, limit=10, exclude_top_domains=true)
-1g. If a URL-extraction tool (Tavily, Firecrawl) is connected: extract query="schema markup structured data FAQ organization person E-E-A-T author". If none is connected, fall back to Step 1g-alt below.
+1g. If Firecrawl is connected: mcp__firecrawl__firecrawl_scrape(url=TARGET_URL, formats=["markdown","html"]) — look for schema markup, structured data, FAQ, organization, person, E-E-A-T, author signals. If not connected, fall back to Step 1g-alt below.
 1g-alt. Bash: curl -s TARGET_URL -A "Mozilla/5.0" -o /tmp/audit_page.html, then parse <script type="application/ld+json"> blocks directly (Python's re + json modules work well) to detect schema types.
 1h. Bash: curl -s -o /dev/null -w "%{http_code}" TARGET_URL/robots.txt && curl -s TARGET_URL/robots.txt | head -20
 1i. Bash: curl -s -o /dev/null -w "%{http_code}" TARGET_URL/sitemap.xml && curl -s TARGET_URL/sitemap.xml | head -5
@@ -125,7 +125,7 @@ From the domain/keyword results: estimated monthly organic traffic, number of ra
 
 ### Step 6 — Output
 
-**If Notion is connected:** search for a database named "SEO/GEO Audits". If not found, create one (Domain=title, Client=text, Audit Date=date, SEO Score=percent, GEO Score=percent, Critical Issues=number, Status=select[Draft/Delivered/In Progress]). Create a page: `[CLIENT] | [DOMAIN] | [AUDIT_DATE]`, with sections for Executive Summary, findings by severity, both full checklists, domain context, and audit notes (flag any data gaps here, e.g. "Tavily unavailable, used curl fallback").
+**If Notion is connected:** search for a database named "SEO/GEO Audits". If not found, create one (Domain=title, Client=text, Audit Date=date, SEO Score=percent, GEO Score=percent, Critical Issues=number, Status=select[Draft/Delivered/In Progress]). Create a page: `[CLIENT] | [DOMAIN] | [AUDIT_DATE]`, with sections for Executive Summary, findings by severity, both full checklists, domain context, and audit notes (flag any data gaps here, e.g. "Firecrawl unavailable, used curl fallback").
 
 **Always, regardless of Notion:** print the terminal summary:
 
